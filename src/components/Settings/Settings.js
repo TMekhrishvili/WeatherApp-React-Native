@@ -15,7 +15,7 @@ const units = [
     { label: "", value: "fahrenheit", imageIcon: require('../../../assets/f.png') }
 ];
 
-const Settings = ({ navigation }) => {
+const Settings = () => {
     const { setUnit, setDifficulty } = useContext(SettingsContext);
     return (
         <View style={styles.container}>
