@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 
-const Home = () => {
+const Home = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <Text>Weather App</Text>
