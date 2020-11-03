@@ -5,7 +5,7 @@ export const SettingsContext = createContext();
 export const SettingsProvider = props => {
     const [score, setScore] = useState(0);
     const [unit, setUnit] = useState("celsius");
-    const [difficulty, setDifficulty] = useState("easy");
+    const [difficulty, setDifficulty] = useState(2);
     const [history, setHistory] = useState([["mumbai", "rome", "milan"]]);
 
     return <SettingsContext.Provider

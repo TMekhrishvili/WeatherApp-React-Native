@@ -2,12 +2,13 @@ import React, { useContext } from 'react';
 import { View, StyleSheet, Image, TouchableOpacity, Text } from 'react-native';
 import SwitchSelector from "react-native-switch-selector";
 import { SettingsContext } from '../../context/SettingsContext';
+
 const url = 'https://www.pncguam.com/wp-content/uploads/2017/09/rain-thunderstorms.png';
 
 const options = [
-    { label: "Easy", value: "easy" },
-    { label: "Medium", value: "medium" },
-    { label: "Hard", value: "hard" }
+    { label: "Easy", value: 2 },
+    { label: "Medium", value: 3 },
+    { label: "Hard", value: 4 }
 ];
 
 const units = [
@@ -16,7 +17,7 @@ const units = [
 ];
 
 const Settings = () => {
-    const { setUnit, setDifficulty } = useContext(SettingsContext);
+    const { setUnit, difficulty, setDifficulty } = useContext(SettingsContext);
     return (
         <View style={styles.container}>
             <View style={styles.imageContainer}>
