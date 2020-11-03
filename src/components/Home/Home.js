@@ -35,16 +35,17 @@ const Home = () => {
         selected.forEach((city) => {
             services.getData(city)
                 .then(value => dispatch(fetchTemperature(value)))
-                .then(value => dispatch(setHistory(value)))
         })
+        dispatch(setHistory(dataOfCities))
     }
     const { difficulty } = useContext(SettingsContext);
     const dataOfCities = useSelector(state => state.temperature);
-
+    const history = useSelector(state => state.history);
+    console.log(history)
     return (
         dataOfCities.length > 0 ? (
             <View style={styles.container}>
-                {dataOfCities.map((value) => <Text style={styles.textTemp}>{value.name}, {value.temp}</Text>)}
+                {dataOfCities.map((value, index) => <Text key={index} style={styles.textTemp}>{value.name}, {value.temp}</Text>)}
             </View>
         ) : (
                 <View style={styles.container}>
