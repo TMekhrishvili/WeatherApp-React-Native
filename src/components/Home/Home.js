@@ -2,7 +2,8 @@ import React, { useEffect, useContext } from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import services from '../../services/services';
-import { clearState, fetchTemperature } from '../../redux/action';
+import { clearState, fetchTemperature } from '../../redux/actions/tempAction';
+import { setHistory } from '../../redux/actions/historyAction';
 import { SettingsContext } from '../../context/SettingsContext';
 
 const citiesArray = [
@@ -22,7 +23,6 @@ const citiesArray = [
 ];
 
 const Home = () => {
-
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(clearState());
@@ -35,6 +35,7 @@ const Home = () => {
         selected.forEach((city) => {
             services.getData(city)
                 .then(value => dispatch(fetchTemperature(value)))
+                .then(value => dispatch(setHistory(value)))
         })
     }
     const { difficulty } = useContext(SettingsContext);

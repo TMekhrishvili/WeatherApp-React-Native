@@ -1,37 +1,27 @@
 import React, { useContext } from 'react';
 import { View, StyleSheet, Text, Image } from 'react-native';
-import { SettingsContext } from '../../context/SettingsContext';
+import { useSelector } from 'react-redux';
 
 const History = () => {
-    const { history } = useContext(SettingsContext);
+    const history = useSelector(state => state.history);
     return (
-        <View style={styles.container}>
-            {history.map((cities, i) => (
-                <View key={i}>
-                    <View justify="center">
-                        {cities.map((city, index) => {
-                            const url = `https://d13k13wj6adfdf.cloudfront.net/urban_areas/${city}.jpg`;
-                            return (
-                                <View key={index}>
-                                    {url ? (
-                                        <Image
-                                            style={styles.logo}
-                                            source={{
-                                                uri: url
-                                            }}
-                                        />
-                                    ) : (
-                                            <Text>Wait</Text>
-                                        )}
-
-                                    <Text>{city.charAt(0).toUpperCase() + city.slice(1)}</Text>
-                                </View>
-                            );
-                        })}
+        history.lenth > 0 ? (
+            <View style={styles.container}>
+                {history.map((value, index) => (
+                    <View key={index}>
+                        <View justify="center">
+                            <View>
+                                <Text>{value.name}</Text>
+                            </View>
+                        </View>
                     </View>
+                ))}
+            </View>
+        ) : (
+                <View style={styles.container}>
+                    <Text>Empty Hisotry</Text>
                 </View>
-            ))}
-        </View>
+            )
     )
 }
 const styles = StyleSheet.create({
