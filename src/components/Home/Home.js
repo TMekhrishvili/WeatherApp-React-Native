@@ -54,20 +54,22 @@ const Home = () => {
                         const photo = `https://d13k13wj6adfdf.cloudfront.net/urban_areas/${city}.jpg`;
                         return (
                             <View style={styles.imageOfCityContainer}>
-                                <Image
-                                    style={styles.cityImage}
-                                    source={{
-                                        uri: photo
-                                    }}
-                                />
-                                <Text key={index} style={styles.textTemp}>
-                                    {value.name}
-                                </Text>
+                                <View style={styles.eachImageAndCityContainer}>
+                                    <TouchableOpacity>
+                                        <Image
+                                            style={styles.cityImage}
+                                            source={{
+                                                uri: photo
+                                            }}
+                                        />
+                                        <Text key={index} style={styles.textTemp}>
+                                            {value.name}
+                                        </Text>
+                                    </TouchableOpacity>
+                                </View>
                             </View>
                         )
-                    }
-
-                    )
+                    })
                 ) : (
                         <Image
                             style={styles.loaderImage}
@@ -95,6 +97,7 @@ const styles = StyleSheet.create({
     textTemp: {
         fontSize: 20,
         fontWeight: 'bold',
+        alignSelf: 'center'
     },
     loaderImage: {
         width: 100,
@@ -121,6 +124,10 @@ const styles = StyleSheet.create({
         fontSize: 18
     },
     imageOfCityContainer: {
+
+    },
+    eachImageAndCityContainer: {
+
     },
     cityImage: {
         width: 100,
