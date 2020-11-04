@@ -47,17 +47,36 @@ const Home = () => {
 
     return (
         <View style={styles.container}>
-            {dataOfCities.length > 0 ? (
-                dataOfCities.map((value, index) => <Text key={index} style={styles.textTemp}>{value.name}, {value.temp}</Text>)
+            <View style={styles.questionContainer}>
+                {dataOfCities.length > 0 ? (
+                    dataOfCities.map((value, index) => {
+                        const city = value.name.charAt(0).toLowerCase() + value.name.slice(1)
+                        const photo = `https://d13k13wj6adfdf.cloudfront.net/urban_areas/${city}.jpg`;
+                        return (
+                            <View style={styles.imageOfCityContainer}>
+                                <Image
+                                    style={styles.cityImage}
+                                    source={{
+                                        uri: photo
+                                    }}
+                                />
+                                <Text key={index} style={styles.textTemp}>
+                                    {value.name}
+                                </Text>
+                            </View>
+                        )
+                    }
 
-            ) : (
-                    <Image
-                        style={styles.loaderImage}
-                        source={{
-                            uri: 'https://www.hopatcongschools.org/lib/img/spinner.gif'
-                        }}
-                    />
-                )}
+                    )
+                ) : (
+                        <Image
+                            style={styles.loaderImage}
+                            source={{
+                                uri: 'https://www.hopatcongschools.org/lib/img/spinner.gif'
+                            }}
+                        />
+                    )}
+            </View>
             <TouchableOpacity
                 style={styles.buttonContainer}
                 onPress={next}>
@@ -72,7 +91,6 @@ const styles = StyleSheet.create({
         backgroundColor: '#c5faf6',
         alignItems: 'center',
         paddingTop: 40,
-        justifyContent: 'center'
     },
     textTemp: {
         fontSize: 20,
@@ -82,13 +100,17 @@ const styles = StyleSheet.create({
         width: 100,
         height: 100
     },
+    questionContainer: {
+        flexGrow: 1,
+        justifyContent: 'center',
+    },
     buttonContainer: {
-        backgroundColor: '#252525',
+        backgroundColor: '#3b43d6',
         paddingVertical: 10,
         fontWeight: 'bold',
         height: 50,
         justifyContent: 'center',
-        width: 310,
+        width: 320,
         marginBottom: 10,
         alignItems: 'center'
     },
@@ -97,6 +119,12 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontWeight: 'bold',
         fontSize: 18
+    },
+    imageOfCityContainer: {
+    },
+    cityImage: {
+        width: 100,
+        height: 150
     }
 })
 export default Home
