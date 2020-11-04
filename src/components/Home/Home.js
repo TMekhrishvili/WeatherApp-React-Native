@@ -1,5 +1,5 @@
 import React, { useEffect, useContext } from 'react';
-import { View, StyleSheet, Text, Image } from 'react-native';
+import { View, StyleSheet, Text, Image, TouchableOpacity } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import services from '../../services/services';
 import { clearTemperatures, fetchTemperature } from '../../redux/actions/tempAction';
@@ -38,6 +38,10 @@ const Home = () => {
         })
         dispatch(setHistory(dataOfCities))
     }
+    const next = () => {
+        dispatch(clearTemperatures());
+        getCities();
+    }
     const { difficulty } = useContext(SettingsContext);
     const dataOfCities = useSelector(state => state.temperature);
 
@@ -45,6 +49,7 @@ const Home = () => {
         <View style={styles.container}>
             {dataOfCities.length > 0 ? (
                 dataOfCities.map((value, index) => <Text key={index} style={styles.textTemp}>{value.name}, {value.temp}</Text>)
+
             ) : (
                     <Image
                         style={styles.loaderImage}
@@ -53,6 +58,11 @@ const Home = () => {
                         }}
                     />
                 )}
+            <TouchableOpacity
+                style={styles.buttonContainer}
+                onPress={next}>
+                <Text style={styles.buttonText}>Continue</Text>
+            </TouchableOpacity>
         </View>
     )
 }
@@ -72,5 +82,21 @@ const styles = StyleSheet.create({
         width: 100,
         height: 100
     },
+    buttonContainer: {
+        backgroundColor: '#252525',
+        paddingVertical: 10,
+        fontWeight: 'bold',
+        height: 50,
+        justifyContent: 'center',
+        width: 310,
+        marginBottom: 10,
+        alignItems: 'center'
+    },
+    buttonText: {
+        color: '#fff',
+        textAlign: 'center',
+        fontWeight: 'bold',
+        fontSize: 18
+    }
 })
 export default Home

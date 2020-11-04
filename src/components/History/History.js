@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 
 const History = () => {
     const history = useSelector(state => state.history);
+    console.log(history)
     return (
         history.lenth > 0 ? (
             <View style={styles.container}>
