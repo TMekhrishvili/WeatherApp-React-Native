@@ -5,7 +5,7 @@ export const fetchTemperature = data => {
     }
 }
 
-export const clearState = () => {
+export const clearTemperatures = () => {
     return {
         type: 'CLEAR_TEMPERATURES'
     }

@@ -1,8 +1,8 @@
 import React, { useEffect, useContext } from 'react';
-import { View, StyleSheet, Text } from 'react-native';
+import { View, StyleSheet, Text, Image } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import services from '../../services/services';
-import { clearState, fetchTemperature } from '../../redux/actions/tempAction';
+import { clearTemperatures, fetchTemperature } from '../../redux/actions/tempAction';
 import { setHistory } from '../../redux/actions/historyAction';
 import { SettingsContext } from '../../context/SettingsContext';
 
@@ -25,7 +25,7 @@ const citiesArray = [
 const Home = () => {
     const dispatch = useDispatch()
     useEffect(() => {
-        dispatch(clearState());
+        dispatch(clearTemperatures());
         getCities();
     }, [dispatch])
 
@@ -40,18 +40,20 @@ const Home = () => {
     }
     const { difficulty } = useContext(SettingsContext);
     const dataOfCities = useSelector(state => state.temperature);
-    const history = useSelector(state => state.history);
-    console.log(history)
+
     return (
-        dataOfCities.length > 0 ? (
-            <View style={styles.container}>
-                {dataOfCities.map((value, index) => <Text key={index} style={styles.textTemp}>{value.name}, {value.temp}</Text>)}
-            </View>
-        ) : (
-                <View style={styles.container}>
-                    <Text style={styles.textTemp}>Wait</Text>
-                </View>
-            )
+        <View style={styles.container}>
+            {dataOfCities.length > 0 ? (
+                dataOfCities.map((value, index) => <Text key={index} style={styles.textTemp}>{value.name}, {value.temp}</Text>)
+            ) : (
+                    <Image
+                        style={styles.loaderImage}
+                        source={{
+                            uri: 'https://www.hopatcongschools.org/lib/img/spinner.gif'
+                        }}
+                    />
+                )}
+        </View>
     )
 }
 const styles = StyleSheet.create({
@@ -59,11 +61,16 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#c5faf6',
         alignItems: 'center',
-        paddingTop: 40
+        paddingTop: 40,
+        justifyContent: 'center'
     },
     textTemp: {
         fontSize: 20,
         fontWeight: 'bold',
-    }
+    },
+    loaderImage: {
+        width: 100,
+        height: 100
+    },
 })
 export default Home
