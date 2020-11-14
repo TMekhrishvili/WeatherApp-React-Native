@@ -3,7 +3,7 @@ const HistoryReducer = (state = [], action) => {
         case 'CLEAR_HISTORY':
             return []
         case 'SET_HISTORY':
-            return state.concat(action.data)
+            return state.concat(...action.data)
         default:
             return state
     }

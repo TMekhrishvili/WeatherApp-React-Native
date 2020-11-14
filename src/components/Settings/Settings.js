@@ -7,8 +7,7 @@ const url = 'https://www.pncguam.com/wp-content/uploads/2017/09/rain-thunderstor
 
 const options = [
     { label: "Easy", value: 2 },
-    { label: "Medium", value: 3 },
-    { label: "Hard", value: 4 }
+    { label: "Hard", value: 3 }
 ];
 
 const units = [
@@ -36,7 +35,7 @@ const Settings = () => {
                     buttonColor={'#3b43d6'}
                     onPress={value => setDifficulty(value)}
                     hasPadding
-                    height={50}
+                    height={45}
                     options={options}
                 />
             </View>
