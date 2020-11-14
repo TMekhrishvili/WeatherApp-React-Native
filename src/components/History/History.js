@@ -5,38 +5,34 @@ import { useSelector } from 'react-redux';
 const History = () => {
     const history = useSelector(state => state.history);
     return (
-        history.lengt > 0 ? (
+        history.length > 0 ? (
             <View style={styles.container}>
-                <ScrollView>
-                    {history.map((value, index) => (
+                {history.map((value, index) => {
+                    const city = value.name.charAt(0).toLowerCase() + value.name.slice(1)
+                    const photo = `https://d13k13wj6adfdf.cloudfront.net/urban_areas/${city}.jpg`;
+                    return (
                         <View key={index} style={styles.imageAndText}>
-                            {value.map((val, ind) => {
-                                const city = value.name.charAt(0).toLowerCase() + value.name.slice(1)
-                                const photo = `https://d13k13wj6adfdf.cloudfront.net/urban_areas/${city}.jpg`;
-                                return (
-                                    <View key={ind} style={styles.vnaxot}>
-                                        <View>
-                                            <Image
-                                                style={styles.cityImage}
-                                                source={{
-                                                    uri: photo
-                                                }}
-                                            />
-                                        </View>
-                                        <Text style={styles.textTemp}>
-                                            {val.name}
-                                        </Text>
-                                    </View>
-                                )
-                            })}
+                            <View style={styles.vnaxot}>
+                                <View>
+                                    <Image
+                                        style={styles.cityImage}
+                                        source={{
+                                            uri: photo
+                                        }}
+                                    />
+                                </View>
+                                <Text style={styles.textTemp}>
+                                    {value.name}
+                                </Text>
+                            </View>
                         </View>
                     )
-                    )}
-                </ScrollView>
+                }
+                )}
             </View>
         ) : (
                 <View style={styles.container}>
-                    <Text>Empty History</Text>
+                    <Text>Empty Hisotry</Text>
                 </View>
             )
     )
@@ -44,12 +40,14 @@ const History = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
+        marginTop: 50,
+        flexDirection: 'row',
         alignItems: 'center',
-        backgroundColor: '#c5faf6',
+        flexWrap: 'wrap'
     },
     imageAndText: {
-        flexDirection: 'row'
+        flexDirection: 'row',
+        margin: 10
     },
     logo: {
         width: 100,
@@ -58,6 +56,7 @@ const styles = StyleSheet.create({
     textTemp: {
         fontSize: 20,
         fontWeight: 'bold',
+        alignSelf: 'center'
     },
     cityImage: {
         width: 100,
