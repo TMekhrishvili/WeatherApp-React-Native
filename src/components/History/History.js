@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { View, StyleSheet, Text, Image, ScrollView } from 'react-native';
 import { useSelector } from 'react-redux';
 
@@ -7,32 +7,37 @@ const History = () => {
     return (
         history.length > 0 ? (
             <View style={styles.container}>
-                {history.map((value, index) => {
-                    const city = value.name.charAt(0).toLowerCase() + value.name.slice(1)
-                    const photo = `https://d13k13wj6adfdf.cloudfront.net/urban_areas/${city}.jpg`;
-                    return (
-                        <View key={index} style={styles.imageAndText}>
-                            <View style={styles.vnaxot}>
-                                <View>
-                                    <Image
-                                        style={styles.cityImage}
-                                        source={{
-                                            uri: photo
-                                        }}
-                                    />
+                <ScrollView style={styles.scroll}>
+                    {history.map((value, index) => {
+                        const city = value.name.charAt(0).toLowerCase() + value.name.slice(1)
+                        const photo = `https://d13k13wj6adfdf.cloudfront.net/urban_areas/${city}.jpg`;
+                        return (
+                            <View key={index} style={styles.imageAndText}>
+                                <View style={styles.vnaxot}>
+                                    <View>
+                                        <Image
+                                            style={styles.cityImage}
+                                            source={{
+                                                uri: photo
+                                            }}
+                                        />
+                                    </View>
+                                    <Text style={styles.textTemp}>
+                                        {value.name}
+                                    </Text>
+                                    <Text style={styles.textTemp}>
+                                        {value.temp}
+                                    </Text>
                                 </View>
-                                <Text style={styles.textTemp}>
-                                    {value.name}
-                                </Text>
                             </View>
-                        </View>
-                    )
-                }
-                )}
+                        )
+                    }
+                    )}
+                </ScrollView>
             </View>
         ) : (
                 <View style={styles.container}>
-                    <Text>Empty Hisotry</Text>
+                    <Text>Empty History</Text>
                 </View>
             )
     )
@@ -40,9 +45,12 @@ const History = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        marginTop: 50,
-        flexDirection: 'row',
+        paddingTop: 50,
+        backgroundColor: '#c5faf6',
         alignItems: 'center',
+    },
+    scroll: {
+        flexDirection: 'row',
         flexWrap: 'wrap'
     },
     imageAndText: {

@@ -38,7 +38,7 @@ const Home = () => {
         })
     }
     const [all, setAll] = useState(0);
-    const { score, setScore, difficulty, showTemp, setShowTemp } = useContext(SettingsContext);
+    const { unit, score, setScore, difficulty, showTemp, setShowTemp } = useContext(SettingsContext);
     const dataOfCities = useSelector(state => state.temperature);
     const history = useSelector(state => state.history);
     const next = () => {
@@ -54,6 +54,10 @@ const Home = () => {
         ));
         var max = Math.max(...temps);
         return max;
+    }
+    const showTemperatureInProperUnit = (value) => {
+        if (unit === 'celsius') return value;
+        else return Math.round((value - 32) * 5 / 9);
     }
     const reset = () => {
         Alert.alert(
@@ -111,7 +115,7 @@ const Home = () => {
                                     </Text>
                                 </TouchableOpacity>
                                 <Text style={styles.textTemp}>
-                                    {showTemp && value.temp}
+                                    {showTemp && showTemperatureInProperUnit(value.temp)}
                                 </Text>
                             </View>
                         )
