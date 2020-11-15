@@ -19,7 +19,10 @@ const citiesArray = [
     "paris",
     "berlin",
     "barcelona",
-    "madrid"
+    "madrid",
+    "london",
+    "athen",
+    "istanbul"
 ];
 
 const Home = () => {
@@ -40,7 +43,6 @@ const Home = () => {
     const [all, setAll] = useState(0);
     const { unit, score, setScore, difficulty, showTemp, setShowTemp } = useContext(SettingsContext);
     const dataOfCities = useSelector(state => state.temperature);
-    const history = useSelector(state => state.history);
     const next = () => {
         dispatch(clearTemperatures());
         getCities();
@@ -115,7 +117,7 @@ const Home = () => {
                                     </Text>
                                 </TouchableOpacity>
                                 <Text style={styles.textTemp}>
-                                    {showTemp && showTemperatureInProperUnit(value.temp)}
+                                    {showTemp && showTemperatureInProperUnit(value.temp)} {showTemp && (unit === 'celsius' ? '°C' : '°F')}
                                 </Text>
                             </View>
                         )
