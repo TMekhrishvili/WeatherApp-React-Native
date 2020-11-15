@@ -112,7 +112,7 @@ const Home = () => {
                                             }}
                                         />
                                     </View>
-                                    <Text style={styles.textTemp}>
+                                    <Text style={styles.textCityName}>
                                         {value.name}
                                     </Text>
                                 </TouchableOpacity>
@@ -162,9 +162,13 @@ const styles = StyleSheet.create({
     reset: {
         color: 'red',
     },
-    textTemp: {
+    textCityName: {
         fontSize: 20,
         fontWeight: 'bold',
+        alignSelf: 'center'
+    },
+    textTemp: {
+        fontSize: 14,
         alignSelf: 'center'
     },
     loaderImage: {
