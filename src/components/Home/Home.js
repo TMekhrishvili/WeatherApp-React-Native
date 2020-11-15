@@ -56,7 +56,7 @@ const Home = () => {
         return max;
     }
     const showTemperatureInProperUnit = (value) => {
-        if (unit === 'celsius') return value;
+        if (unit === 'fahrenheit') return value;
         else return Math.round((value - 32) * 5 / 9);
     }
     const reset = () => {
